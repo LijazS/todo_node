@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const config = require('./config/env');
 const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
@@ -18,28 +19,21 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-// Root endpoint for browsers and platform probes
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Todo API is running',
-    endpoints: {
-      health: '/health',
-      register: '/api/auth/register',
-      login: '/api/auth/login',
-      todos: '/api/todos'
-    }
-  });
-});
-
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
+
+// Frontend entry point
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 
 // 404 handler
 app.use((req, res) => {

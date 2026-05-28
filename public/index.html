@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskCanvas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Single-deploy app</p>
+        <h1>TaskCanvas keeps your day in one calm, focused place.</h1>
+        <p class="hero-text">
+          Register, sign in, and manage your todos from the same Azure-hosted app.
+          Your frontend and backend now ship together.
+        </p>
+        <div class="hero-metrics">
+          <div>
+            <span class="metric-label">API</span>
+            <strong>Express + MongoDB</strong>
+          </div>
+          <div>
+            <span class="metric-label">Auth</span>
+            <strong>JWT session</strong>
+          </div>
+          <div>
+            <span class="metric-label">Deploy</span>
+            <strong>One App Service</strong>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-glow"></div>
+        <div class="hero-card-content">
+          <p class="mini-label">Live workspace</p>
+          <h2 id="welcome-title">Sign in to view your todos</h2>
+          <p id="welcome-subtitle">Create an account or use your existing login to continue.</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-grid">
+      <section class="panel auth-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Account</p>
+            <h2>Access your workspace</h2>
+          </div>
+          <button id="logout-button" class="ghost-button hidden" type="button">Log out</button>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Authentication tabs">
+          <button id="tab-login" class="tab-button active" type="button" data-mode="login">Login</button>
+          <button id="tab-register" class="tab-button" type="button" data-mode="register">Register</button>
+        </div>
+
+        <form id="auth-form" class="stack">
+          <div id="username-field" class="field hidden">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" minlength="3" maxlength="50" autocomplete="username">
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required minlength="6" autocomplete="current-password">
+          </div>
+
+          <button id="auth-submit" class="primary-button" type="submit">Login</button>
+        </form>
+
+        <div id="auth-message" class="message" aria-live="polite"></div>
+      </section>
+
+      <section class="panel todo-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Dashboard</p>
+            <h2>Your todos</h2>
+          </div>
+          <div class="filter-group">
+            <label for="todo-filter">Filter</label>
+            <select id="todo-filter">
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <form id="todo-form" class="todo-form">
+          <input id="todo-id" type="hidden">
+          <div class="field">
+            <label for="todo-title">Title</label>
+            <input id="todo-title" type="text" maxlength="100" required placeholder="Ship Azure frontend">
+          </div>
+
+          <div class="field">
+            <label for="todo-description">Description</label>
+            <textarea id="todo-description" maxlength="500" rows="4" placeholder="Add a simple UI, then connect login and CRUD flows."></textarea>
+          </div>
+
+          <div class="todo-form-grid">
+            <div class="field">
+              <label for="todo-priority">Priority</label>
+              <select id="todo-priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="todo-due-date">Due date</label>
+              <input id="todo-due-date" type="date">
+            </div>
+          </div>
+
+          <div class="todo-form-actions">
+            <button id="todo-submit" class="primary-button" type="submit">Create todo</button>
+            <button id="todo-cancel" class="ghost-button hidden" type="button">Cancel edit</button>
+          </div>
+        </form>
+
+        <div id="todo-message" class="message" aria-live="polite"></div>
+
+        <div id="todo-empty" class="empty-state">
+          <h3>Your list is waiting</h3>
+          <p>Log in to load your tasks, then create your first todo here.</p>
+        </div>
+
+        <div id="todo-list" class="todo-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

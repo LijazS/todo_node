@@ -1,0 +1,465 @@
+:root {
+  color-scheme: light;
+  --bg: #f4efe7;
+  --bg-accent: #efe3d2;
+  --surface: rgba(255, 250, 244, 0.8);
+  --surface-strong: #fffaf4;
+  --text: #1f2933;
+  --muted: #6c7380;
+  --line: rgba(31, 41, 51, 0.12);
+  --primary: #b4492f;
+  --primary-deep: #8a311f;
+  --primary-soft: #f8d9c5;
+  --success: #2b7a4b;
+  --danger: #b53d2f;
+  --shadow: 0 24px 80px rgba(95, 55, 28, 0.12);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(180, 73, 47, 0.16), transparent 28%),
+    radial-gradient(circle at right 20%, rgba(64, 145, 108, 0.16), transparent 24%),
+    linear-gradient(180deg, var(--bg) 0%, #fbf7f1 100%);
+}
+
+.page-shell {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.hero-copy,
+.hero-card,
+.panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: var(--surface);
+  backdrop-filter: blur(22px);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+.hero-copy {
+  padding: 36px;
+}
+
+.hero-copy h1 {
+  margin: 0 0 16px;
+  max-width: 12ch;
+  font-family: "Fraunces", serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.hero-text,
+#welcome-subtitle,
+.message,
+.empty-state p,
+.todo-card p {
+  color: var(--muted);
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-metrics div,
+.filter-group,
+.todo-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.58);
+  border-radius: var(--radius-md);
+}
+
+.hero-metrics div {
+  padding: 14px;
+}
+
+.metric-label,
+.eyebrow,
+.mini-label,
+label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow,
+.mini-label,
+label,
+.metric-label {
+  color: var(--muted);
+}
+
+.hero-card {
+  min-height: 280px;
+  padding: 28px;
+  display: flex;
+  align-items: flex-end;
+  background:
+    linear-gradient(160deg, rgba(180, 73, 47, 0.92), rgba(80, 122, 100, 0.88)),
+    var(--surface);
+  color: #fffdf9;
+}
+
+.hero-card-glow {
+  position: absolute;
+  inset: auto -10% 20% auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 999px;
+  background: rgba(255, 233, 194, 0.24);
+  filter: blur(10px);
+}
+
+.hero-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-card h2 {
+  margin: 8px 0 10px;
+  font-family: "Fraunces", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+.hero-card p,
+.hero-card .mini-label {
+  color: rgba(255, 250, 244, 0.88);
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.panel {
+  padding: 24px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.panel-header h2,
+.empty-state h3,
+.todo-card h3 {
+  margin: 0;
+  font-family: "Fraunces", serif;
+}
+
+.tabs {
+  display: inline-flex;
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+}
+
+.tab-button,
+.primary-button,
+.ghost-button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+.tab-button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: 160ms ease;
+}
+
+.tab-button.active {
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+  font-weight: 700;
+}
+
+.stack {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid rgba(31, 41, 51, 0.14);
+  border-radius: 14px;
+  padding: 13px 14px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--text);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(180, 73, 47, 0.56);
+  box-shadow: 0 0 0 4px rgba(180, 73, 47, 0.12);
+  transform: translateY(-1px);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.primary-button,
+.ghost-button {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.primary-button {
+  border: 0;
+  color: #fffaf5;
+  background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+  box-shadow: 0 16px 28px rgba(138, 49, 31, 0.22);
+}
+
+.primary-button:hover,
+.ghost-button:hover,
+.todo-action:hover {
+  transform: translateY(-1px);
+}
+
+.ghost-button {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text);
+}
+
+.message {
+  min-height: 24px;
+  margin-top: 14px;
+  font-size: 0.95rem;
+}
+
+.message.success {
+  color: var(--success);
+}
+
+.message.error {
+  color: var(--danger);
+}
+
+.filter-group {
+  min-width: 132px;
+  padding: 10px 12px;
+}
+
+.filter-group label {
+  margin-bottom: 6px;
+}
+
+.todo-form {
+  display: grid;
+  gap: 16px;
+}
+
+.todo-form-grid,
+.todo-form-actions {
+  display: grid;
+  gap: 14px;
+}
+
+.todo-form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.todo-form-actions {
+  grid-template-columns: repeat(2, auto);
+  justify-content: start;
+}
+
+.empty-state {
+  margin-top: 20px;
+  padding: 24px;
+  border: 1px dashed rgba(31, 41, 51, 0.16);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.todo-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.todo-card {
+  padding: 18px;
+  animation: card-in 220ms ease;
+}
+
+.todo-card.completed {
+  background: rgba(230, 241, 233, 0.88);
+}
+
+.todo-card-header,
+.todo-meta,
+.todo-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.todo-card-header {
+  margin-bottom: 10px;
+}
+
+.todo-card h3 {
+  font-size: 1.2rem;
+}
+
+.todo-meta {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 12px 0 14px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.pill.priority-low {
+  background: #e8f3ea;
+  color: #2d6c46;
+}
+
+.pill.priority-medium {
+  background: #f9e9bf;
+  color: #8d5f10;
+}
+
+.pill.priority-high {
+  background: #f6d3cb;
+  color: #9e3124;
+}
+
+.pill.status {
+  background: rgba(31, 41, 51, 0.08);
+  color: var(--muted);
+}
+
+.todo-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.todo-action {
+  border: 0;
+  background: transparent;
+  color: var(--primary-deep);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.todo-action.secondary {
+  color: var(--muted);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .app-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy h1 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 20px, 1200px);
+    padding-top: 20px;
+  }
+
+  .hero-copy,
+  .hero-card,
+  .panel {
+    padding: 20px;
+  }
+
+  .hero-metrics,
+  .todo-form-grid,
+  .todo-form-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-header {
+    flex-direction: column;
+  }
+}
