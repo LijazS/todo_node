@@ -38,7 +38,9 @@ const getTodos = async (req, res, next) => {
       filter.completed = completed === 'true';
     }
 
-    const todos = await Todo.find(filter).sort({ createdAt: -1 });
+    // Cosmos DB can reject ORDER BY on createdAt when that path is not indexed.
+    // Sorting by _id still gives a stable newest-first order without extra index setup.
+    const todos = await Todo.find(filter).sort({ _id: -1 });
 
     res.json({
       count: todos.length,
