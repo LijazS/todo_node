@@ -24,6 +24,19 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
+// Root endpoint for browsers and platform probes
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Todo API is running',
+    endpoints: {
+      health: '/health',
+      register: '/api/auth/register',
+      login: '/api/auth/login',
+      todos: '/api/todos'
+    }
+  });
+});
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
