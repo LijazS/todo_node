@@ -52,4 +52,4 @@ jobs:
           app-name: 'lijaz'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_22A2A2FC45D74FEA90ED4D9A17F8E5CB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
